@@ -25,3 +25,31 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
+#check calls database
+#gets only callers
+unique_num_callers = []
+i = 0
+j = 0
+
+for i in range(len(calls)):
+    if calls[i][0] not in unique_num_callers:
+        unique_num_callers.append(calls[i][0])
+
+sender_texts = []
+
+for j in range(len(texts)):
+        if texts[j][0] not in sender_texts:
+            sender_texts.append(texts[j][0])
+
+sorted(sender_texts)
+sorted(unique_num_callers)
+
+for ele in sender_texts:
+    if ele in unique_num_callers:
+        unique_num_callers.remove(ele)
+
+tele_nums = sorted(unique_num_callers)
+
+print("These numbers may be telemarkers: ")
+for i in tele_nums:
+    print('{}'.format(i))
