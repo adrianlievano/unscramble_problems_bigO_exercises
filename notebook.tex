@@ -1,0 +1,1034 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Unscramble Computer Science Problems}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Adrian Lievano Project 1 Submission: Unscrambling Computer
+Science
+Problems}\label{adrian-lievano-project-1-submission-unscrambling-computer-science-problems}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{k+kn}{import} \PY{n+nn}{csv}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{texts.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+             \PY{n}{texts} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{reader}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{calls.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+             \PY{n}{calls} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{reader}\PY{p}{)}
+\end{Verbatim}
+
+
+    """ TASK 0: What is the first record of texts and what is the last
+record of calls? Print messages: "First record of texts, texts at time "
+"Last record of calls, calls at time , lasting seconds" """
+
+    \subsection{Task 0}\label{task-0}
+
+    \subsubsection{First Record}\label{first-record}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}187}]:} \PY{n}{texts}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{First record of texts, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ texts }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ at time }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{texts}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{texts}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{texts}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+First record of texts, 97424 22395 texts 90365 06212 at time 01-09-2016 06:03:22
+
+    \end{Verbatim}
+
+    \subsubsection{Last Record}\label{last-record}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}188}]:} \PY{n}{calls}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} 
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Last record of calls, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ calls }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ at time }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{calls}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{calls}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Last record of calls, 98447 62998 calls (080)46304537 at time 30-09-2016 23:57:15
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    O(1) -\/-\textgreater{} indexing into a list is constant runtime; it
+does not depend on the input length.
+
+    \section{Task 1}\label{task-1}
+
+    """ TASK 1: How many different telephone numbers are there in the
+records? Print a message: "There are different telephone numbers in the
+records." """
+
+    Method 1: 1. Find unique telephone numbers through text database
+(senders \& receivers) 2. Find unique telephone numbers through calls
+database (senders \& receivers) 3. Append 4. Calculate len 5. Print
+message
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{n}{unique\PYZus{}num} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{c+c1}{\PYZsh{}check text database}
+          
+          \PY{c+c1}{\PYZsh{}check sending nums}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{texts}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{texts}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{texts}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  
+              \PY{k}{if} \PY{n}{texts}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{texts}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{}check calls database}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ different telephone numbers in the records}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{unique\PYZus{}num}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 570 different telephone numbers in the records
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    O(n) -\/-\textgreater{} As the order of input scales by n, the worst
+case scenario means that the amount of computations increases by n.
+Because the for loops are not nested, we do not have O(n\^{}2) runtime.
+Space complexity is O(n).
+
+    \section{Task 2}\label{task-2}
+
+    """ TASK 2: Which telephone number spent the longest time on the phone
+during the period? Don't forget that time spent answering a call is also
+time spent on the phone. Print a message: " spent the longest time,
+seconds, on the phone during September 2016.". """
+
+    Method:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Find unique call numbers and increment the starting value by the
+  duration value in the calls list, or calls{[}n{]}{[}3{]}, where n
+  corresponds to that specific number
+\item
+  Build a hash with each unique number, iterate through calls list and
+  if the key matches the list element, n, increment the value there by
+  the value at that key
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}190}]:} \PY{c+c1}{\PYZsh{}find unique values}
+          \PY{n}{unique\PYZus{}call\PYZus{}nums} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{}build hash of unique CALL numbers and initialize to zero. O(n) runtime.}
+          \PY{n}{num\PYZus{}hash} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{num\PYZus{}hash}\PY{p}{[}\PY{n}{unique\PYZus{}call\PYZus{}nums}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+              
+          \PY{c+c1}{\PYZsh{}iterate through calls list}
+          \PY{c+c1}{\PYZsh{}If iterative element is in list of keys, increment that value to existing key\PYZsq{}s value.}
+          \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+          
+          \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{n}{num\PYZus{}hash}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}O(1)}
+                  \PY{n}{num\PYZus{}hash}\PY{p}{[}\PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                  
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{in} \PY{n}{num\PYZus{}hash}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}O(1)}
+                  \PY{n}{num\PYZus{}hash}\PY{p}{[}\PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+          
+          
+          \PY{n}{duration} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{num\PYZus{}hash}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}O(n)}
+          \PY{n}{culprit} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{num\PYZus{}hash}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{num\PYZus{}hash}\PY{o}{.}\PY{n}{get}\PY{p}{)} \PY{c+c1}{\PYZsh{}O(n)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ spent the longest time, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ seconds, on the phone during September 2016.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{culprit}\PY{p}{,} \PY{n}{duration}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(080)33251027 spent the longest time, 90456 seconds, on the phone during September 2016.
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    I implemented an algorithm that first (i) searches through n elements in
+the calls list (both sender \& receiver) and builds another list that
+tracks if there are any unique elements. After, (ii) the code
+initializes a hash map with its keys each being a unique call number
+found in the calls list. From there, (iii) we again iterate through the
+calls list, length n, and search through the hash map to see if the
+phone number is equal to the key in the hash map, length m. Python's 'if
+in' high-level syntax iterates through the keys of length m. If we
+assume the worse case scenario, where each number in the calls list, n,
+is unique, m will be equal to n (m=n). Because we are looping twice,
+this algorithm in the worst case scenario is:
+
+O(n\^{}2).
+
+We did, however, modify our code to include, instead of looping through
+keys, an if statement that checks the associated value at the designated
+key location, which is O(1). If we do this, our implementation can be
+reduced to:
+
+O(n).
+
+    \section{Task 3}\label{task-3}
+
+    """ TASK 3: (080) is the area code for fixed line telephones in
+Bangalore. Fixed line numbers include parentheses, so Bangalore numbers
+have the form (080)xxxxxxx.)
+
+Part A: Find all of the area codes and mobile prefixes called by people
+in Bangalore. - Fixed lines start with an area code enclosed in
+brackets. The area codes vary in length but always begin with 0. -
+Mobile numbers have no parentheses, but have a space in the middle of
+the number to help readability. The prefix of a mobile number is its
+first four digits, and they always start with 7, 8 or 9. -
+Telemarketers' numbers have no parentheses or space, but they start with
+the area code 140.
+
+Print the answer as part of a message: "The numbers called by people in
+Bangalore have codes:" The list of codes should be print out one per
+line in lexicographic order with no duplicates.
+
+Part B: What percentage of calls from fixed lines in Bangalore are made
+to fixed lines also in Bangalore? In other words, of all the calls made
+from a number starting with "(080)", what percentage of these calls were
+made to a number also starting with "(080)"?
+
+Print the answer as a part of a message:: " percent of calls from fixed
+lines in Bangalore are calls to other fixed lines in Bangalore." The
+percentage should have 2 decimal digits """
+
+    \subsection{Part A}\label{part-a}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Find all the people with bangalore numbers in calls database that MADE
+  phone calls.
+\item
+  Check who they called
+\item
+  Extract area codes \& mobile prefixes
+\item
+  build unique list
+\item
+  identify fixed lines, mobile, and telemarketers
+\item
+  sort lexographically
+\item
+  Print iteratively each elemenet
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}191}]:} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{c+c1}{\PYZsh{}check calls database}
+          \PY{n}{bangalore\PYZus{}nums} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{called\PYZus{}by\PYZus{}banga} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}Build total list of numbers called by bangalore numbers}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(080)}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:}
+                  \PY{n}{bangalore\PYZus{}nums}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{called\PYZus{}by\PYZus{}banga}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Build unique list of numbers called by bangalore phones}
+          \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{called\PYZus{}by\PYZus{}banga}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mobile\PYZus{}prefix} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{tele\PYZus{}pref} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{140}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{pref} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}Fixed area code identifier}
+              \PY{k}{if} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{fixed\PYZus{}pref} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{while} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{p}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{fixed\PYZus{}pref} \PY{o}{+}\PY{o}{=} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{p} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}
+                      \PY{n}{p} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{k}{if} \PY{n}{fixed\PYZus{}pref} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{pref}\PY{p}{:}
+                      \PY{n}{pref}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fixed\PYZus{}pref}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}Mobile called identifier}
+              \PY{k}{if} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{n}{mobile\PYZus{}prefix} \PY{o+ow}{and} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mobile\PYZus{}prefix}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{pref}\PY{p}{:}
+                  \PY{n}{pref}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mobile\PYZus{}prefix}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}Telemarketer identifier }
+              \PY{k}{if} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{==} \PY{n}{tele\PYZus{}pref} \PY{o+ow}{and} \PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{pref}\PY{p}{:}
+                  \PY{n}{pref}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{unique\PYZus{}called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+                  
+              
+          \PY{c+c1}{\PYZsh{}sort call list lexographically        }
+          \PY{n}{s\PYZus{}area\PYZus{}codes} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{pref}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{}Print area code prefixes }
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The numbers called by people in Bangalore have codes:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s\PYZus{}area\PYZus{}codes}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{s\PYZus{}area\PYZus{}codes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The numbers called by people in Bangalore have codes:
+
+(022)
+(040)
+(04344)
+(044)
+(04546)
+(0471)
+(080)
+(0821)
+7406
+7795
+7813
+7829
+8151
+8152
+8301
+8431
+8714
+9008
+9019
+9035
+9036
+9241
+9242
+9341
+9342
+9343
+9400
+9448
+9449
+9526
+9656
+9738
+9740
+9741
+9742
+9844
+9845
+9900
+9961
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    O(n\^{}2): In particular, there are a few sections in my code that
+leverage python's 'if not in' structure within a for loop. In this
+scenario, the worse case is O(n\^{}2). If the input list length, n, and
+the unique\_called\_by\_banga, or the secondary list, denoted length m,
+being checked through each loop itearation, are unique, then m will
+equal n, and the worse run time is 0(n\^{}2). ```
+unique\_called\_by\_banga = {[}{]} for i in
+range(len(called\_by\_banga)): if called\_by\_banga{[}i{]} not in
+unique\_called\_by\_banga:
+unique\_called\_by\_banga.append(called\_by\_banga{[}i{]})
+
+```
+
+    \subsection{Part B}\label{part-b}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{c+c1}{\PYZsh{}check calls database}
+          \PY{n}{bangalore\PYZus{}nums} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{called\PYZus{}by\PYZus{}banga} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}Build total list of numbers called by bangalore numbers}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(080)}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:}
+                  \PY{n}{bangalore\PYZus{}nums}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{called\PYZus{}by\PYZus{}banga}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{bangalore\PYZus{}nums}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{bangalore\PYZus{}nums}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(080)}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{and} \PY{n}{called\PYZus{}by\PYZus{}banga}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(080)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{total\PYZus{}calls} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{called\PYZus{}by\PYZus{}banga}\PY{p}{)}
+          \PY{n}{percent\PYZus{}banga\PYZus{}to\PYZus{}banga} \PY{o}{=} \PY{p}{(}\PY{n}{count}\PY{o}{/}\PY{n}{total\PYZus{}calls}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{100.0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{ percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{percent\PYZus{}banga\PYZus{}to\PYZus{}banga}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+24.81 percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    Sequential implementation of linear for loops, based on the length of
+the calls database with a simple conditional check, is, in the worst
+case scenario:
+
+O(n).
+
+    \section{Task 4}\label{task-4}
+
+    """ TASK 4: The telephone company want to identify numbers that might be
+doing telephone marketing. Create a set of possible telemarketers: these
+are numbers that make outgoing calls but never send texts, receive texts
+or receive incoming calls.
+
+Print a message: "These numbers could be telemarketers: " The list of
+numbers should be print out one per line in lexicographic order with no
+duplicates. """
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Telemarkers make outgoing calls; or, in the calls database, they are
+  never in the second index
+\item
+  Telemarkers never send texts, so we should compare the telemarkers we
+  suspect from the prior condition and determine if any of them send a
+  text
+\item
+  Telemarkers should not receive texts
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{}check calls database}
+          \PY{c+c1}{\PYZsh{}gets only callers}
+          \PY{n}{unique\PYZus{}num\PYZus{}callers} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{calls}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{calls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{sender\PYZus{}texts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{texts}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{texts}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{sender\PYZus{}texts}\PY{p}{:}
+                      \PY{n}{sender\PYZus{}texts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{texts}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{sender\PYZus{}texts}\PY{p}{)}
+          \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{ele} \PY{o+ow}{in} \PY{n}{sender\PYZus{}texts}\PY{p}{:}
+              \PY{k}{if} \PY{n}{ele} \PY{o+ow}{in} \PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{p}{:}
+                  \PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{ele}\PY{p}{)}
+          
+          \PY{n}{tele\PYZus{}nums} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{unique\PYZus{}num\PYZus{}callers}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{These numbers may be telemarkers: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tele\PYZus{}nums}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+These numbers may be telemarkers: 
+(011)21017178
+(011)68486606
+(022)21884607
+(022)22288051
+(022)28765220
+(022)28952819
+(022)29303640
+(022)30044349
+(022)32517986
+(022)34715405
+(022)37572285
+(022)38214945
+(022)39006198
+(022)40840621
+(022)44927512
+(022)45444747
+(022)46574732
+(022)47410783
+(022)60273083
+(022)62120910
+(022)65548497
+(022)66911540
+(022)68535788
+(022)69042431
+(033)25441815
+(040)26738737
+(040)30429041
+(040)34008657
+(040)36649724
+(040)66729318
+(040)69695864
+(04344)211113
+(04344)228249
+(04344)316423
+(04344)322628
+(04344)615310
+(04344)617351
+(04344)649705
+(044)20550065
+(044)22020822
+(044)24037112
+(044)25144377
+(044)27523585
+(044)27641880
+(044)30360652
+(044)30727085
+(044)38044356
+(044)41581342
+(044)45416964
+(044)45838604
+(044)48154960
+(044)49481100
+(044)49868415
+(044)69775060
+(04546)218519
+(04546)267875
+(04546)388977
+(0471)2171438
+(0471)2225098
+(0471)2953539
+(0471)4255177
+(0471)6537077
+(0471)6579079
+(080)20123809
+(080)20227149
+(080)20383942
+(080)21129907
+(080)21652896
+(080)21697299
+(080)22759842
+(080)22816760
+(080)23802940
+(080)24444677
+(080)25820765
+(080)25863765
+(080)26097534
+(080)27498339
+(080)29435303
+(080)29483476
+(080)30231886
+(080)30270642
+(080)31606520
+(080)31863188
+(080)31982490
+(080)32255824
+(080)32390650
+(080)32638303
+(080)32647101
+(080)32679828
+(080)32828889
+(080)33118033
+(080)33251027
+(080)33277651
+(080)34121098
+(080)34932254
+(080)35121497
+(080)35538852
+(080)35986130
+(080)35987804
+(080)37913009
+(080)39755879
+(080)39991213
+(080)40362016
+(080)40395498
+(080)40929452
+(080)41095396
+(080)41203315
+(080)41336994
+(080)41712046
+(080)43206415
+(080)43215621
+(080)43562014
+(080)43685310
+(080)43901222
+(080)44046839
+(080)44050207
+(080)44076727
+(080)44357306
+(080)44389098
+(080)45291968
+(080)45547058
+(080)45687418
+(080)46221576
+(080)46304537
+(080)46566171
+(080)46702492
+(080)46772413
+(080)47459867
+(080)47999451
+(080)48462898
+(080)49328664
+(080)49796269
+(080)60062475
+(080)60068611
+(080)60463379
+(080)60998034
+(080)61123756
+(080)61419142
+(080)62164823
+(080)62342282
+(080)62963633
+(080)63623429
+(080)64015211
+(080)64047472
+(080)64431120
+(080)64765396
+(080)64819785
+(080)65023950
+(080)65275591
+(080)66044294
+(080)66857551
+(080)66955387
+(080)67362492
+(080)67426410
+(080)68104927
+(080)68739140
+(080)69104549
+(080)69150162
+(080)69245029
+(080)69564399
+(080)69609453
+(080)69887826
+(0821)2135265
+(0821)3257740
+(0821)3537229
+(0821)3602212
+(0821)3774599
+(0821)4753474
+(0821)4816394
+(0821)6141380
+(08214175)358
+(0824)2022081
+(0824)2145844
+(0824)6366719
+1400481538
+1401747654
+1402316533
+1403072432
+1403579926
+1404073047
+1404368883
+1404787681
+1407539117
+1408371942
+1408409918
+1408672243
+1409421631
+1409668775
+1409994233
+70127 59322
+74064 66270
+74065 10917
+74292 23928
+74298 18325
+74298 85702
+77956 55474
+78130 36804
+78134 03625
+78135 69048
+78136 54214
+78138 93826
+78290 99865
+78291 94593
+78293 38561
+78295 20931
+78993 89387
+81513 36123
+84313 80377
+84319 52539
+87144 42283
+87144 55014
+87146 58071
+87149 75762
+89071 32787
+89071 50880
+90085 20915
+90089 69682
+90192 30758
+90193 16567
+90193 61937
+90196 73585
+90197 38885
+90199 67471
+90351 90193
+90355 49499
+90357 25284
+90368 95100
+92414 69419
+92415 66985
+92423 51078
+92426 65661
+92426 72402
+93412 26084
+93414 19669
+93426 76415
+93427 40118
+93428 98469
+93430 54160
+93432 24657
+94001 62063
+94002 85593
+94005 20878
+94489 82688
+94495 03761
+95263 76972
+95266 42732
+96569 95359
+97393 52893
+97402 57057
+97403 88244
+97404 30456
+97404 90013
+97407 84573
+97410 27512
+97414 35000
+97416 18084
+97418 46131
+97418 59299
+97419 90520
+97425 79921
+97426 64618
+97427 87999
+97429 02055
+97442 45192
+98440 71648
+98442 73671
+98443 72004
+98444 16192
+98444 63396
+98445 27876
+98445 71741
+98445 85687
+98447 62998
+98448 88411
+98453 94494
+98457 75681
+98458 94162
+98459 20681
+99002 80226
+99617 25274
+
+    \end{Verbatim}
+
+    \subsubsection{Worse-Case Big O Notation
+Analysis}\label{worse-case-big-o-notation-analysis}
+
+    This is a brute force algorithm, where we build two lists, using linear
+algorithms, and then check if the element in the sender list is in the
+calling list. Because the worse case scenario could mean checking n
+elements from the sender list to m elements, this is a:
+
+O(n\^{}n) algorithm, or O(n!).
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
